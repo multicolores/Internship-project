@@ -1,0 +1,18 @@
+// .dialog_field{
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+// }
+
+.dialog_button {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.dialog_field {
+  width: 20vw;
+  padding-bottom: 2vh;
+  .form-field {
+    width: 100%;
+  }
+}

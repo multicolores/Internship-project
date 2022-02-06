@@ -1,0 +1,38 @@
+.content {
+  // p{
+  //     padding: 5% 0;
+  // }
+  // h4{
+  // font-weight: 700;
+  // margin: 0;
+  // }
+  .idmoreinfoContainer {
+    position: relative;
+    // padding: 2vh 0;
+    .clearIcon {
+      position: absolute;
+      right: 0;
+      top: 0;
+      cursor: pointer;
+    }
+    .usedInElement_Container {
+      padding: 3vh 0;
+      .usedInElement {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h3 {
+          // margin: 0 5%;
+          font-size: 1.3em;
+          margin: 0;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+.dialog_button {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}

@@ -1,0 +1,126 @@
+<section class="data_table">
+  <div class="search_add_container">
+    <div class="nouvelleDataContainer">
+      <button mat-raised-button color="accent" class="nouveau_bt" (click)="show = !show" *ngIf="show">
+        Create data
+      </button>
+      <div class="fieldContainer" *ngIf="!show">
+        <mat-icon class="clearIcon" (click)="show = !show">clear</mat-icon>
+        <div *ngFor="let key of dataColumns">
+          <div
+            *ngIf="!optionsObjectId[key] && !optionsObjectProposition[key] && !PrefilledOptionsProposition[key] && key !== 'createdAt' && key !== 'updatedAt'"
+          >
+            <mat-form-field class="form-field" *ngIf="key === 'id'">
+              <mat-label>{{key}}</mat-label>
+              <input
+                matInput
+                type="text"
+                [(ngModel)]="valueToAdd[key]"
+                (ngModelChange)="idNgModelChange()"
+                (keydown.space)="$event.preventDefault()"
+                autocomplete="off"
+              />
+              <mat-hint *ngIf="idAlreadyUse" class="errorId">This id is already used</mat-hint>
+            </mat-form-field>
+            <mat-form-field class="form-field" *ngIf="key !== 'id'">
+              <mat-label>{{key}}</mat-label>
+              <input matInput type="text" [(ngModel)]="valueToAdd[key]" autocomplete="off" />
+            </mat-form-field>
+          </div>
+          <mat-form-field class="form-field" *ngIf="optionsObjectProposition[key]">
+            <mat-label>{{key}}</mat-label>
+            <input type="text" aria-label="data" matInput [matAutocomplete]="auto" [(ngModel)]="valueToAdd[key]" />
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of optionsObjectProposition[key]" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <mat-form-field class="form-field" *ngIf="PrefilledOptionsProposition[key]">
+            <mat-label>{{key}}</mat-label>
+            <mat-select [(ngModel)]="valueToAdd[key]">
+              <mat-option *ngFor="let option of PrefilledOptionsProposition[key]" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div *ngIf="optionsObjectId[key]">
+            <div *ngIf="optionsObjectId[key].length === 0" class="NoIdContainer">
+              <mat-form-field class="form-field" appearance="fill">
+                <mat-label>{{key}}</mat-label>
+                <input matInput disabled value="Aucun id n'existe" />
+              </mat-form-field>
+            </div>
+
+            <div *ngIf="optionsObjectId[key].length !== 0">
+              <mat-form-field class="form-field">
+                <mat-label>{{key}}</mat-label>
+                <input type="text" aria-label="data" matInput [matAutocomplete]="auto" [(ngModel)]="valueToAdd[key]" />
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of optionsObjectId[key]" [value]="option"> {{option}} </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="bt_container">
+          <button mat-raised-button color="accent" class="nouveau_bt" (click)="add()">Send</button>
+          <button mat-raised-button class="nouveau_bt" (click)="valueToAdd = {}">Clear</button>
+        </div>
+      </div>
+    </div>
+    <mat-form-field appearance="standard" class="searchBar">
+      <mat-label>Filter data</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. B1" #input />
+    </mat-form-field>
+  </div>
+
+  <div class="data_container">
+    <div class="table_container">
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        class="mat-elevation-z8"
+        matSort
+        (matSortChange)="announceSortChange($event)"
+      >
+        <div *ngFor="let key of dataColumns">
+          <div *ngIf="key !== 'createdAt' && key !== 'updatedAt'">
+            <ng-container matColumnDef="{{key}}">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{key}}</th>
+              <td mat-cell *matCellDef="let element">{{element[key]}}</td>
+            </ng-container>
+          </div>
+
+          <div *ngIf="key == 'createdAt' || key == 'updatedAt'">
+            <ng-container matColumnDef="{{key}}">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{key}}</th>
+              <td mat-cell *matCellDef="let element">{{element[key] | date: 'dd/MM/yyyy/ hh:mm a'}}</td>
+            </ng-container>
+          </div>
+        </div>
+
+        <ng-container matColumnDef="button">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element" class="delet">
+            <button mat-stroked-button color="primary" (click)="patch(element)" *ngIf="showModifierBt">Change</button>
+            <button mat-raised-button color="warn" (click)="delete(element)">Delete <mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <button mat-raised-button class="icon_ScrollToTop" (click)="ScrollToTop()">
+    <mat-icon>keyboard_arrow_up</mat-icon>
+  </button>
+</section>

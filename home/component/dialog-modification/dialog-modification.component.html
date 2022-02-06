@@ -1,0 +1,67 @@
+<h2 mat-dialog-title>id : {{data.data.id}}</h2>
+
+<div mat-dialog-content class="dialog_field">
+  <div *ngFor="let key of dataColumns">
+
+    <div *ngIf="!optionsObjectId[key] && !optionsObjectProposition[key] && !PrefilledOptionsProposition[key] && key !== 'createdAt' && key !== 'updatedAt' && key !== 'id'">
+        <mat-form-field class="form-field" *ngIf="key === 'id'">
+            <mat-label>{{key}}</mat-label>
+            <input matInput type="text" [(ngModel)]="DataModel.data[key]" (keydown.space)="$event.preventDefault()" autocomplete="off">
+          </mat-form-field>
+          <mat-form-field class="form-field" *ngIf="key !== 'id'">
+            <mat-label>{{key}}</mat-label>
+            <input matInput type="text" [(ngModel)]="DataModel.data[key]" autocomplete="off">
+          </mat-form-field>
+    </div>
+      <mat-form-field class="form-field" *ngIf="optionsObjectProposition[key]">
+            <mat-label>{{key}}</mat-label>
+            <input type="text"
+                   aria-label="data"
+                   matInput
+                   [matAutocomplete]="auto"
+                   [(ngModel)]="DataModel.data[key]">
+            <mat-autocomplete #auto="matAutocomplete" >
+              <mat-option *ngFor="let option of optionsObjectProposition[key]" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field class="form-field" *ngIf="PrefilledOptionsProposition[key]">
+        <mat-label>{{key}}</mat-label>
+        <input type="text"
+               aria-label="data"
+               matInput
+               [matAutocomplete]="auto"
+               [(ngModel)]="DataModel.data[key]">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of PrefilledOptionsProposition[key]" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <div *ngIf="optionsObjectId[key]">
+        <div>
+            <mat-form-field class="form-field">
+                <mat-label>{{key}}</mat-label>
+                <input type="text"
+                       aria-label="data"
+                       matInput
+                       [matAutocomplete]="auto"
+                       [(ngModel)]="DataModel.data[key]">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of optionsObjectId[key]" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+        </div>      
+      </div>
+</div>
+</div>
+
+<div mat-dialog-actions class="dialog_button">
+  <button mat-button (click)="onAnnuler()">Cancel</button>
+  <button mat-raised-button color="primary" mat-dialog-close (click)="onModifier(DataModel)" cdkFocusInitial >Change</button>
+</div>

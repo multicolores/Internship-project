@@ -1,0 +1,76 @@
+.data_table {
+  padding: 0vh 10vw;
+  padding-bottom: 5vh;
+  .search_add_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    .nouveau_bt {
+      margin-bottom: 2vh;
+    }
+    .searchBar {
+      width: 30%;
+    }
+    .nouvelleDataContainer {
+      width: 25vw;
+      .fieldContainer {
+        padding: 2vh 0;
+        .clearIcon {
+          display: block;
+          margin: auto 5px auto auto;
+          cursor: pointer;
+        }
+        .NoIdContainer {
+          padding-bottom: 2vh;
+        }
+        .form-field {
+          width: 100%;
+        }
+        .bt_container {
+          text-align: end;
+          padding: 1vh 0;
+          button {
+            margin-left: 10px;
+          }
+        }
+        .errorId {
+          color: red;
+        }
+      }
+    }
+  }
+  .data_container {
+    position: relative;
+    .table_container {
+      height: 100%;
+      overflow: auto;
+      table {
+        width: 100%;
+        vertical-align: middle;
+        th,
+        td {
+          vertical-align: middle !important;
+        }
+        .delet {
+          text-align: right;
+          button {
+            margin-right: 5px !important;
+          }
+        }
+      }
+    }
+    .sorting_bt {
+      padding: 0;
+      min-width: 0;
+      z-index: 5;
+      position: absolute;
+      left: -40px;
+      top: 8px;
+    }
+  }
+  .icon_ScrollToTop {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+  }
+}

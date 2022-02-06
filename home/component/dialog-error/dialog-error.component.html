@@ -1,0 +1,8 @@
+
+<h2>Error {{error.status}}</h2>
+<!-- <p *ngIf="error.status == 403">Un ou plusieurs id rentrée n'existe pas.</p> -->
+<p>{{error.message}}</p>
+
+<div mat-dialog-actions class="dialog_button" >
+    <button mat-button (click)="onOk()">Ok</button>
+</div>

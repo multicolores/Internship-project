@@ -1,0 +1,62 @@
+
+  <!-- <nav class="table_nav">
+    <button *ngFor="let key of objectKeys(NavArray)" mat-button color="primary" routerLinkActive="active-link" [routerLink]="['/home/data/',key]">{{NavArray[key]}}</button>
+  </nav> -->
+
+  <nav class="table_nav">
+    <div class="btContainer">
+      <div class="SETUP_DEFINITION">
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/module-instances">Module Instances</button>
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/modules">Modules</button>
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/systems">Systems</button>
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/system-types">System Types</button>
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/system-categories">Système catégorie</button>
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/system-versions">System Versions</button>
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/environment-module-instances">Environment Module Instances</button>
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/environments">Environments</button>
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/platforms">Platforms</button>
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/infrastructures">Infrastructures</button>
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/deployment-environments">Deployment Environments</button>
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/regions">Regions</button>
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/brands">Brand</button>
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/setups">Setups</button>
+      </div>
+      <div class="SID-UID_MAPPING">
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/services">Services</button>
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/contributors">Contributors</button>
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/contributors-services">Contributors Services</button>
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/contributor-actions">Contributors Actions</button>
+      </div>
+      <div class="DIAG-UID_MAPPING">
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/contributors-module-instances">Contributors Module Instances</button>
+      </div>
+      <div class="METHODS_CHECKS">
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/checks">Checks</button>
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/method-checks">Method Checks</button>
+        <button mat-button color="primary" routerLinkActive="active-link" routerLink="/home/data/methods">Methods</button>
+      </div>
+    </div>
+  </nav>
+
+
+    <!-- <div class="search_container"> -->
+      <!-- <mat-icon class="icon">search</mat-icon> -->
+        <mat-form-field class="field">
+          <mat-label>Search a table</mat-label>
+          <input type="text"
+                 aria-label="Table"
+                 matInput
+                 [formControl]="myControl"
+                 [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option" [routerLink]="['/home/data/',option]">
+              <span>{{option}}</span>
+            </mat-option>
+          </mat-autocomplete>
+          <button *ngIf="myControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="valueReset()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      <!-- </div> -->
+
+<router-outlet></router-outlet>

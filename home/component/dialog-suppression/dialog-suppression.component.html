@@ -1,0 +1,33 @@
+<!-- <h2 mat-dialog-title>{{data.name}}</h2> -->
+
+
+<!-- <div class="content">
+    <h4>id: {{data.id}} </h4>
+    <h4>name: {{data.name}} </h4>
+    <p>Êtes vous sûrs de vouloir supprimer : {{data.name}} </p>
+</div> -->
+<div mat-dialog-content class="content">
+  <div *ngFor="let key of dataColumns">
+    <h4 *ngIf="key !== 'createdAt' && key !== 'updatedAt'">{{key}} : {{Elementdata[key]}}</h4>
+    <h4 *ngIf="key == 'createdAt' || key == 'updatedAt'">{{key}} : {{Elementdata[key] | date: 'dd/MM/yyyy/ hh:mm a'}}</h4>
+  </div>
+
+  <!-- info about where the id is used  -->
+  <div *ngIf="!isEmpty(data.IdUtilisationObj)">
+    <button mat-flat-button color="primary" (click)="getIdsData()" *ngIf="show" >Look where it is used</button>
+    <div *ngIf="!show" class="idmoreinfoContainer">
+      <mat-icon class="clearIcon" (click)="show = !show">clear</mat-icon>
+      <div class="usedInElement_Container">
+        <div *ngFor="let key of dataIdColumns" class="usedInElement">
+          <h3 [routerLink]="['/home/data/',key]" (click)="onAnnuler()">In {{key}} : used {{alreadyUseIddata[key]}} time(s)</h3>
+          <button mat-button [routerLink]="['/home/data/',key]" (click)="onAnnuler()">See</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-actions class="dialog_button" >
+  <button mat-button (click)="onAnnuler()" cdkFocusInitial>Cancel</button>
+  <button mat-raised-button color="warn" mat-dialog-close (click)="onSupprimer(Elementdata)">Delete</button>
+</div>
